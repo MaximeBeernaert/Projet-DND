@@ -7,6 +7,7 @@ class Monstre {
     private $descAtk;
     private $def;
     private $exp;
+    
 
     public function __construct($nom, $pv, $atk, $descAtk, $def, $exp){
         $this->nom = $nom;

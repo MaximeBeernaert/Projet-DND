@@ -53,9 +53,12 @@ DROP TABLE IF EXISTS `objet`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `objet` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `inInventaire` int(11) DEFAULT NULL,
   `nom` varchar(100) NOT NULL,
   `desc` varchar(100) DEFAULT NULL,
+  `heal` int(11) DEFAULT NULL,
+  `atk` int(11) DEFAULT NULL,
+  `def` int(11) DEFAULT NULL,
+  `dodge` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -99,6 +102,30 @@ INSERT INTO `personnage` VALUES (1,'Yohann',100,10,10,0,1);
 UNLOCK TABLES;
 
 --
+-- Table structure for table `porter`
+--
+
+DROP TABLE IF EXISTS `porter`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `porter` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `idPerso` int(11) NOT NULL,
+  `idObj` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `porter`
+--
+
+LOCK TABLES `porter` WRITE;
+/*!40000 ALTER TABLE `porter` DISABLE KEYS */;
+/*!40000 ALTER TABLE `porter` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `salle`
 --
 
@@ -138,4 +165,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-11-23 11:15:32
+-- Dump completed on 2023-11-23 12:18:00

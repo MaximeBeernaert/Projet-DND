@@ -8,12 +8,12 @@ class SalleDAO {
     }
 
     public function addSalle($salle){
-        $req = $this->db->prepare('INSERT INTO salle (id, nom, description, id_monstre, id_objet) VALUES (:id, :nom, :description, :id_monstre, :id_objet)');
-        $req->bindValue(':id', $salle->getId(), PDO::PARAM_INT);
-        $req->bindValue(':nom', $salle->getNom(), PDO::PARAM_STR);
-        $req->bindValue(':description', $salle->getDescription(), PDO::PARAM_STR);
-        $req->bindValue(':id_monstre', $salle->getIdMonstre(), PDO::PARAM_INT);
-        $req->bindValue(':id_objet', $salle->getIdObjet(), PDO::PARAM_INT);
+        $req = $this->db->prepare('INSERT INTO salle (id, niveau, ennemie, piege, enigme, marchand) VALUES (:id, :niveau, :ennemie, :piege, :enigme, :marchand)');
+        $req->bindValue(':niveau', $salle->getNiveau(), PDO::PARAM_INT);
+        $req->bindValue(':ennemie', $salle->getEnnemie(), PDO::PARAM_STR);
+        $req->bindValue(':piege', $salle->getPiege(), PDO::PARAM_STR);
+        $req->bindValue(':enigme', $salle->getEnigme(), PDO::PARAM_STR);
+        $req->bindValue(':marchand', $salle->getMarchand(), PDO::PARAM_STR);
         $req->execute();
     }
 
@@ -24,12 +24,13 @@ class SalleDAO {
     }
 
     public function updateSalle($salle){
-        $req = $this->db->prepare('UPDATE salle SET nom = :nom, description = :description, id_monstre = :id_monstre, id_objet = :id_objet WHERE id = :id');
+        $req = $this->db->prepare('UPDATE salle SET niveau = :niveau, ennemie = :ennemie, piege = :piege, enigme = :enigme, marchand = :marchand WHERE id = :id');
         $req->bindValue(':id', $salle->getId(), PDO::PARAM_INT);
-        $req->bindValue(':nom', $salle->getNom(), PDO::PARAM_STR);
-        $req->bindValue(':description', $salle->getDescription(), PDO::PARAM_STR);
-        $req->bindValue(':id_monstre', $salle->getIdMonstre(), PDO::PARAM_INT);
-        $req->bindValue(':id_objet', $salle->getIdObjet(), PDO::PARAM_INT);
+        $req->bindValue(':niveau', $salle->getNiveau(), PDO::PARAM_INT);
+        $req->bindValue(':ennemie', $salle->getEnnemie(), PDO::PARAM_STR);
+        $req->bindValue(':piege', $salle->getPiege(), PDO::PARAM_STR);
+        $req->bindValue(':enigme', $salle->getEnigme(), PDO::PARAM_STR);
+        $req->bindValue(':marchand', $salle->getMarchand(), PDO::PARAM_STR);
         $req->execute();
     }
 
@@ -38,10 +39,10 @@ class SalleDAO {
         $req->bindValue(':id', $id, PDO::PARAM_INT);
         $req->execute();
         $donnees = $req->fetch(PDO::FETCH_ASSOC);
-        return new Salle($donnees['id'], $donnees['nom'], $donnees['description'], $donnees['id_monstre'], $donnees['id_objet']);
+        return new Salle($donnees['id'], $donnees['niveau'], $donnees['ennemie'], $donnees['piege'], $donnees['enigme'], $marchand['marchand']);
     }
 }
-
+ 
 
 
 

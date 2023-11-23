@@ -13,6 +13,13 @@ private $db;
         return $donnees;
     }
 
+    public function getPersonnageNiveau($id){
+        $req = $this->db->prepare('SELECT niveau FROM personnage WHERE id = :id');
+        $req->execute(array('id' => $id));
+        $donnees = $req->fetch();
+        return $donnees;
+    }
+
     public function getPersonnages(){
         $personnages = array();
         $req = $this->db->prepare('SELECT * FROM personnage');
@@ -21,18 +28,28 @@ private $db;
             $personnages[] = $donnees;
         }
         return $personnages;
+    }
 
+    public function getLastPersonnageId(){
+        $req = $this->db->prepare('SELECT MAX(id) FROM personnage');
+        $req->execute();
+        $donnees = $req->fetch();
+        return $donnees;
     }
 
     public function addPersonnage($personnage){
-        $req = $this->db->prepare('INSERT INTO personnage(nom, pv, atk, def, exp, level) VALUES(:name, :pv, :atk, :def, :exp, :level)');
+        $req = $this->db->prepare('INSERT INTO personnage(nom, pv, atk, def, exp, level, maxpv, maxdef, dodge, maxatk) VALUES(:name, :pv, :atk, :def, :exp, :level, :maxpv, :maxdef, :dodge, :maxatk)');
         $req->execute(array(
             'name' => $personnage->getName(),
             'pv' => $personnage->getPv(),
             'atk' => $personnage->getAtk(),
             'def' => $personnage->getDef(),
             'exp' => $personnage->getExp(),
-            'level' => $personnage->getLevel()
+            'level' => $personnage->getLevel(),
+            'maxpv' => $personnage->getMaxpv(),
+            'maxdef' => $personnage->getMaxdef(),
+            'dodge' => $personnage->getDodge(),
+            'maxatk' => $personnage->getMaxatk()
         ));
     }
 
