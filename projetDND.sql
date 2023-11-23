@@ -29,8 +29,9 @@ CREATE TABLE `monstre` (
   `descAtk` varchar(100) NOT NULL,
   `def` int(11) NOT NULL,
   `exp` int(11) NOT NULL,
+  `pv` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -39,6 +40,7 @@ CREATE TABLE `monstre` (
 
 LOCK TABLES `monstre` WRITE;
 /*!40000 ALTER TABLE `monstre` DISABLE KEYS */;
+INSERT INTO `monstre` VALUES (1,'Gobelin',10,'Attaque de base',5,10,10);
 /*!40000 ALTER TABLE `monstre` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -83,7 +85,7 @@ CREATE TABLE `personnage` (
   `exp` int(11) NOT NULL,
   `level` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -92,6 +94,7 @@ CREATE TABLE `personnage` (
 
 LOCK TABLES `personnage` WRITE;
 /*!40000 ALTER TABLE `personnage` DISABLE KEYS */;
+INSERT INTO `personnage` VALUES (1,'Yohann',100,10,10,0,1);
 /*!40000 ALTER TABLE `personnage` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -135,4 +138,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-11-23 10:59:24
+-- Dump completed on 2023-11-23 11:15:32

@@ -1,8 +1,12 @@
 <?php
 class Salle {
-    private $db;
+    protected $level;
+    protected $ennemie;
+    protected $piege;
+    protected $enigme;
+    protected $marchand;
 
-    public function __construct($db){
+    public function __construct($level,$ennemie,$piege,$){
         $this->db = $db;
     }
 
