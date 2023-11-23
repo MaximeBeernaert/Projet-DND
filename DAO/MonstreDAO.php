@@ -1,5 +1,6 @@
 <?php
 
+
 class MonstreDAO {
     private $db;
 
@@ -12,7 +13,7 @@ class MonstreDAO {
         $requete = $this->db->prepare($sql);
         $requete->execute();
 
-        $monstres = $requete->fetchAll()
+        $monstres = $requete->fetchAll();
         return $monstres;
     }
 

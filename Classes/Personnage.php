@@ -1,19 +1,14 @@
 <?php
 class Personnage {
     protected $name;
-    protected $pv;
-    protected $atk;
-    protected $def;
-    protected $exp;
-    protected $level;
+    protected $pv = 100;
+    protected $atk = 10;
+    protected $def = 10;
+    protected $exp = 0;
+    protected $level = 1;
 
-    public function __construct($name, $pv, $atk, $def, $exp, $level){
+    public function __construct($name){
         $this->name = $name;
-        $this->pv = $pv;
-        $this->atk = $atk;
-        $this->def = $def;
-        $this->exp = $exp;
-        $this->level = $level;
     }
 
     // GETTER

@@ -1,5 +1,4 @@
 <?php
-include ('Personnage.php');
 class PersonnageDAO {
 private $db;
 
@@ -7,14 +6,14 @@ private $db;
         $this->db = $db;
     }
 
-    public function getpersonnage($id){
+    public function getPersonnage($id){
         $req = $this->db->prepare('SELECT * FROM personnage WHERE id = :id');
         $req->execute(array('id' => $id));
         $donnees = $req->fetch();
         return $donnees;
     }
 
-    public function getpersonnages(){
+    public function getPersonnages(){
         $personnages = array();
         $req = $this->db->prepare('SELECT * FROM personnage');
         $req->execute();
@@ -25,38 +24,39 @@ private $db;
 
     }
 
-    public function addpersonnage($personnage){
-        $req = $this->db->prepare('INSERT INTO personnage(name, pv, pa, pd, xp, level,comp) VALUES(:name, :pv, :pa, :pd, :xp, :level, :comp)');
+    public function addPersonnage($personnage){
+        $req = $this->db->prepare('INSERT INTO personnage(nom, pv, atk, def, exp, level) VALUES(:name, :pv, :atk, :def, :exp, :level)');
         $req->execute(array(
             'name' => $personnage->getName(),
             'pv' => $personnage->getPv(),
-            'pa' => $personnage->getPa(),
-            'pd' => $personnage->getPd(),
-            'xp' => $personnage->getXp(),
-            'level' => $personnage->getLevel(),
-            'comp' => $personnage->getComp()
+            'atk' => $personnage->getAtk(),
+            'def' => $personnage->getDef(),
+            'exp' => $personnage->getExp(),
+            'level' => $personnage->getLevel()
         ));
     }
 
-    public function updatepersonnage($personnage){
-        $req = $this->db->prepare('UPDATE personnage SET name = :name, pv = :pv, pa = :pa, pd = :pd, xp = :xp, level = :level, comp = :comp WHERE id = :id');
+    public function updatePersonnage ($id, $personnage) {
+        $req = $this->db->prepare('UPDATE personnage SET name = :name, pv = :pv, atk = :atk, def = :def, exp = :exp, level = :level WHERE id = :id');
         $req->execute(array(
             'name' => $personnage->getName(),
             'pv' => $personnage->getPv(),
-            'pa' => $personnage->getPa(),
-            'pd' => $personnage->getPd(),
-            'xp' => $personnage->getXp(),
+            'atk' => $personnage->getAtk(),
+            'def' => $personnage->getDef(),
+            'exp' => $personnage->getExp(),
             'level' => $personnage->getLevel(),
-            'comp' => $personnage->getComp(),
-            'id' => $personnage->getId()
+            'id' => $id
         ));
+        
     }
 
-    public function deletepersonnage($id){
-        $req = $this->db->prepare('DELETE FROM personnage WHERE id = :id');
-        $req->execute(array('id' => $id));
-    }
+    public function deletePersonnage($id){
+        $sql = 'DELETE FROM personnage WHERE id = :id';
+        $requete = $this->db->prepare($sql);
+        $requete->execute(array('id' => $id));
 
+    }
 }
- $nouveauPersonnage = new PersonnageDAO($db);
+    
+
 ?>

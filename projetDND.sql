@@ -16,30 +16,30 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `ennemi`
+-- Table structure for table `monstre`
 --
 
-DROP TABLE IF EXISTS `ennemi`;
+DROP TABLE IF EXISTS `monstre`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `ennemi` (
+CREATE TABLE `monstre` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `nom` varchar(100) NOT NULL,
   `atk` int(11) NOT NULL,
   `descAtk` varchar(100) NOT NULL,
-  `pa` int(11) NOT NULL,
+  `def` int(11) NOT NULL,
   `exp` int(11) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `ennemi`
+-- Dumping data for table `monstre`
 --
 
-LOCK TABLES `ennemi` WRITE;
-/*!40000 ALTER TABLE `ennemi` DISABLE KEYS */;
-/*!40000 ALTER TABLE `ennemi` ENABLE KEYS */;
+LOCK TABLES `monstre` WRITE;
+/*!40000 ALTER TABLE `monstre` DISABLE KEYS */;
+/*!40000 ALTER TABLE `monstre` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -135,4 +135,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-11-23 10:37:02
+-- Dump completed on 2023-11-23 10:59:24
