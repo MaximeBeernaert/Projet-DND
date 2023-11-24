@@ -54,7 +54,7 @@ CREATE TABLE `enigme` (
   `intitule` varchar(100) NOT NULL,
   `reponse` varchar(100) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -63,6 +63,7 @@ CREATE TABLE `enigme` (
 
 LOCK TABLES `enigme` WRITE;
 /*!40000 ALTER TABLE `enigme` DISABLE KEYS */;
+INSERT INTO `enigme` VALUES (1,'Qu\'est-ce qui est jaune et qui attend ?','Jonathan'),(2,'Qu\'est-ce qui est vert et qui attend ?','Jonathan'),(3,'Qu\'est-ce qui est rouge et qui attend ?','Jonathan'),(4,'Qu\'est-ce qui est bleu et qui attend ?','Jonathan'),(5,'Qu\'est-ce qui est noir et qui attend ?','Jonathan');
 /*!40000 ALTER TABLE `enigme` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -82,7 +83,7 @@ CREATE TABLE `monstre` (
   `exp` int(11) NOT NULL,
   `pv` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -91,7 +92,7 @@ CREATE TABLE `monstre` (
 
 LOCK TABLES `monstre` WRITE;
 /*!40000 ALTER TABLE `monstre` DISABLE KEYS */;
-INSERT INTO `monstre` VALUES (1,'Gobelin',10,'Attaque de base',5,10,10);
+INSERT INTO `monstre` VALUES (1,'Gobelin',10,'Attaque de base',5,10,20),(2,'Dragon',20,'Souffle de feu',10,500,100),(3,'Ogre',25,'Frappe puissante',15,600,120),(4,'Spectre',15,'Toucher glacial',8,300,80),(5,'Banshee',18,'Cri perçant',12,400,90),(6,'Loup-garou',22,'Morsure féroce',12,550,110),(7,'Chimère',30,'Rugissement dévastateur',20,700,150),(8,'Hydre',35,'Morsure venimeuse',25,800,180),(9,'Orc',12,'Frappe brutale',10,300,80),(10,'Elemental',40,'Furie élémentaire',30,1000,200),(11,'Golem',45,'Frappe de pierre',35,1200,250),(12,'Géant',50,'Frappe dévastatrice',40,1500,300),(13,'Squelette',8,'Attaque de base',5,200,50),(14,'Zombie',10,'Morsure infectée',8,250,60),(15,'Vampire',12,'Morsure vampirique',10,300,70),(16,'Liche',15,'Toucher glacial',12,400,100),(17,'Démon',20,'Frappe démoniaque',15,600,150);
 /*!40000 ALTER TABLE `monstre` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -144,7 +145,7 @@ CREATE TABLE `personnage` (
   `maxdef` int(11) NOT NULL,
   `maxatk` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -153,7 +154,7 @@ CREATE TABLE `personnage` (
 
 LOCK TABLES `personnage` WRITE;
 /*!40000 ALTER TABLE `personnage` DISABLE KEYS */;
-INSERT INTO `personnage` VALUES (5,'Maxime',100,10,10,0,1,100,10,10),(6,'Maxime',100,10,10,0,1,100,10,10),(7,'Maxime',100,10,10,0,1,100,10,10),(8,'Maxime',100,10,10,0,1,100,10,10),(9,'Maxime',100,10,10,0,1,100,10,10),(10,'Maxime',100,10,10,0,1,100,10,10),(11,'Maxime',100,10,10,0,1,100,10,10),(12,'Maxime',100,10,10,0,1,100,10,10),(13,'Maxime',100,10,10,0,1,100,10,10),(14,'Maxime',100,10,10,0,1,100,10,10),(15,'Maxime',100,10,10,0,1,100,10,10),(16,'Maxime',100,10,10,0,1,100,10,10),(17,'Maxime',100,10,10,0,1,100,10,10);
+INSERT INTO `personnage` VALUES (5,'Yohann',100,10,10,0,1,100,10,10),(6,'Maxime',80,10,10,0,1,100,10,10),(18,'bob',70,10,10,1100,1,100,10,10);
 /*!40000 ALTER TABLE `personnage` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -245,4 +246,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-11-24 11:24:13
+-- Dump completed on 2023-11-24 16:40:52
