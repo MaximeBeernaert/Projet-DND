@@ -7,7 +7,8 @@ class Monstre {
     private $descAtk;
     private $def;
     private $exp;
-    private $poisoned;
+    private $poisoned = 0;
+    private $isDenfending = false;
 
     public function __construct($nom, $pv, $atk, $descAtk, $def, $exp){
         $this->nom = $nom;
@@ -16,7 +17,6 @@ class Monstre {
         $this->descAtk = $descAtk;
         $this->def = $def;
         $this->exp = $exp;
-        $this->poisoned = 0;
     }
 
     // GETTER
@@ -46,6 +46,10 @@ class Monstre {
 
     public function getPoisoned(){
         return $this->poisoned;
+    }
+
+    public function getIsDefending(){
+        return $this->isDefending;
     }
 
 
@@ -79,14 +83,9 @@ class Monstre {
         $this->poisoned = $poisoned;
     }
 
-    public function isPoisoned() {  
-        return $this->poisoned > 0;
+    public function setIsDefending($isDefending){
+        $this->isDefending = $isDefending;
     }
-
-    public function reducePoisond(){
-        $this->poisoned -=1;
-    }
-
 
 }
 ?>

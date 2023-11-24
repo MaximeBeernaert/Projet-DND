@@ -104,16 +104,6 @@ class Personnage {
     public function setIsDefending($isDefending){
         $this->isDefending = $isDefending;
     }
-
-    //fonction de défense
-    public function startDefending() {
-        $this->isDefending = true;
-    }
-
-    public function stopDefending() {
-        $this->isDefending = false;
-    }
-
 }
 
 

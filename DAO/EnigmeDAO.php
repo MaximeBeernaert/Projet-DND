@@ -12,7 +12,7 @@ class EnigmeDAO {
         $req = $this->db->prepare($sql);
         $req->bindValue(':id', $id);
         $req->execute();
-        $enigme = $req->fetchAll();
+        $enigme = $req->fetchAll()[0];
         return $enigme;
     }
 
