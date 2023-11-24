@@ -1,4 +1,5 @@
 <?php
+// CREATE CLASS SALLE
 class Salle {
     protected $niveau;
     protected $ennemie;
@@ -6,6 +7,7 @@ class Salle {
     protected $enigme;
     protected $marchand;
 
+    // CREATE CONSTRUCTOR
     public function __construct($niveau,$ennemie,$piege,$enigme,$marchand){
         $this->niveau = $niveau;
         $this->ennemie = $ennemie;
@@ -14,6 +16,7 @@ class Salle {
         $this->marchand = $marchand;
     }
 
+    // GETTER
     public function getNiveau(){
         return $this->niveau;
     }
@@ -30,6 +33,7 @@ class Salle {
         return $this->marchand;
     }
 
+    // SETTER
     public function setNiveau($niveau){
         $this->niveau = $niveau;
     }
