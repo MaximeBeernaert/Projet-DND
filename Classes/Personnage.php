@@ -1,6 +1,8 @@
 <?php
 
 // CREATE CLASS PERSONNAGE
+
+// CREATE CLASS PERSONNAGE
 class Personnage {
     protected $name;
     protected $pv = 100;
@@ -8,14 +10,21 @@ class Personnage {
     protected $def = 10;
     protected $exp = 0;
     protected $expNext = 0;
+    protected $expNext = 0;
     protected $level = 1;
     protected $id;
     protected $maxpv = 100;
     protected $maxdef = 10;
     protected $maxatk = 10;
+    protected $maxpv = 100;
+    protected $maxdef = 10;
+    protected $maxatk = 10;
     protected $dodge = 0;
     protected $isDefending = false;
+    protected $isDefending = false;
 
+    // CREATE CONSTRUCTOR
+    public function __construct($name){
     // CREATE CONSTRUCTOR
     public function __construct($name){
         $this->name = $name;

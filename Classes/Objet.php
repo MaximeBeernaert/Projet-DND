@@ -1,5 +1,6 @@
 <?php
 // CREATE CLASS OBJET
+// CREATE CLASS OBJET
 class Objet {
     protected $nom;
     protected $desc;
@@ -10,7 +11,9 @@ class Objet {
     protected $isConsumable;
     protected $niveauMinimum;
     protected $isPoison = 0;
+    protected $isPoison = 0;
 
+    // CREATE CONSTRUCTOR
     // CREATE CONSTRUCTOR
     public function __construct($nom, $desc, $heal, $atk, $def, $dodge, $isConsumable, $niveauMinimum){
         $this->nom = $nom;
@@ -59,6 +62,9 @@ class Objet {
     public function getIsPoison(){
         return $this->isPoison;
     }
+    public function getIsPoison(){
+        return $this->isPoison;
+    }
 
     // SETTER
 
@@ -92,6 +98,10 @@ class Objet {
 
     public function setNiveauMinimum($niveauMinimum){
         $this->niveauMinimum = $niveauMinimum;
+    }
+
+    public function setIsPoison($isPoison){
+        $this->isPoison = $isPoison;
     }
 
     public function setIsPoison($isPoison){
