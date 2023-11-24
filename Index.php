@@ -240,7 +240,7 @@ function jeterObjet($gestionDAO, $personnage){
     popen('cls', 'w');
     
     // Display prompt for choosing an object to discard
-    echo "Which object do you want to discard?\n\n";
+    echo "Quel objet voulez vous jetter?\n\n";
     
     // Get and display the list of objects carried by the character
     $gestionDAO['porterDAO']->getPorterByPersonnage($personnage->getId());
@@ -257,7 +257,7 @@ function jeterObjet($gestionDAO, $personnage){
     echo $key+2 . " - Back\n\n";
     
     // Prompt the user for the choice of the object to discard
-    $choix = (int)readline('Enter the number of the object you want to discard: ');
+    $choix = (int)readline("Saisissez le numéro de l'objet que vous souhaitez éliminer: ");
     
     // Validate the user's choice
     if($choix < 1 || $choix > count($gestionDAO['porterDAO']->getPorter())+1){
@@ -277,10 +277,10 @@ function jeterObjet($gestionDAO, $personnage){
     $gestionDAO['porterDAO']->deletePorter($gestionDAO['porterDAO']->getPorter()[$choix-1]['id']);
     
     // Display a message indicating that the object has been discarded
-    echo "You have discarded the object " . $objet['nom'] . "\n\n";
+    echo "tu as jeter l'objet " . $objet['nom'] . "\n\n";
     
     // Prompt the user to press Enter to continue
-    readline("Press Enter to continue");
+    readline("tapez entree pour continuer");
 }
 
 
@@ -328,30 +328,45 @@ function updatePerso($gestionDAO, $personnage){
 
 // INCREASE PLAYER LEVEL
 function levelUp($gestionDAO, $personnage){
+    // Check if the character has enough experience to level up
     if($personnage->getExp() < $personnage->getLevel()*200){
-        echo "Vous n'avez pas assez d'expérience pour gagner un niveau !\n";
-        readline("Appuyer sur entrer pour continuer");
-        menuJoueur($gestionDAO, $personnage);
+        echo "Vous n'avez pas assez d'expérience pour monter en niveau!\n";
+        readline("Appuyez sur la touche Entrée pour continuer");
+        menuPlayer($gestionDAO, $personnage);
     }
+
+    // Increase the character's level and reset their experience
     $personnage->setLevel($personnage->getLevel() + 1);
     $personnage->setExp(0);
+
+    // Increase the character's statistics
     $personnage->setMaxpv($personnage->getMaxpv() + 10);
     $personnage->setMaxdef($personnage->getMaxdef() + 5);
     $personnage->setMaxatk($personnage->getMaxatk() + 5);
-    $gestionDAO['personnageDAO']->updatePersonnage($personnage->getId(), $personnage);
-    updatePerso($personnage);
-    echo "Vous avez gagné un niveau !\nVos stats ont été augmentées !\n\n";
 
+    // Update the character in the database
+    $gestionDAO['personnageDAO']->updatePersonnage($personnage->getId(), $personnage);
+    
+    // Update the display of the character
+    updateCharacter($personnage);
+
+    // Display a message indicating that the character has leveled up
+    echo "Vous êtes passé au niveau supérieur ! Vos statistiques ont été augmentées!\n\n";
+
+    // Check if the character reaches level 3 to choose a new skill
     if($personnage->getLevel() == 3 ){
-        echo "Vous pouvez choisir une nouvelle compétence ! \nChoisissez une compétence parmis les suivantes :\n";
-        $competences = $gestionDAO['competenceDAO']->getCompetencesByNiveauMinimum(3);
+        echo "Vous pouvez choisir une nouvelle compétence ! \nChoisissez une compétence parmi les suivantes:\n";
+
+        // Get available skills at level 3 from the database
+        $competences = $gestionDAO['competenceDAO']->getCompetencesByMinimumLevel(3);
+
+        // Display available skills
         foreach($competences as $key => $competence){
             echo $key+1 . " - " . $competence['nom'] . " - " . $competence['desc'] . "\n";
         }
-        $choix = (int)readline("Votre choix : ");
-
-
+        $choice = (int)readline("Votre choix: ");
     }
+
 
     readline("Appuyer sur entrer pour continuer");
     menuJoueur($gestionDAO, $personnage);
@@ -359,8 +374,13 @@ function levelUp($gestionDAO, $personnage){
 
 // GIVES MONSTER XP TO THE PLAYER
 function takeExp($gestionDAO, $personnage, $exp){
+    // Add the gained experience to the character's current experience
     $exp += $personnage->getExp();
-    $personnage->setExp($personnage->getExp());
+    
+    // Set the character's experience to the total accumulated experience
+    $personnage->setExp($exp);
+
+    // Update the character in the database with the new experience value
     $gestionDAO['personnageDAO']->updatePersonnage($personnage->getId(), $personnage);
 }
 

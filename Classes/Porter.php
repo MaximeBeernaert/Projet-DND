@@ -1,17 +1,15 @@
 <?php
-// CREATE CLASS PORTER// CREATE CLASS PORTER
+// CREATE CLASS PORTER
 class Porter {
     protected $idPerso;
     protected $idObj;
 
-    // CREATE CONSTRUCTOR
     // CREATE CONSTRUCTOR
     public function __construct($idPerso, $idObj){
         $this->idPerso = $idPerso;
         $this->idObj = $idObj;
     }
 
-    // GETTER
     // GETTER
     public function getIdPerso(){
         return $this->idPerso;
