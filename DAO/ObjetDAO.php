@@ -12,8 +12,8 @@ class ObjetDAO {
         $requete = $this->db->prepare($sql);
         $requete->execute();
 
-        $monstres = $requete->fetchAll();
-        return $monstres;
+        $objets = $requete->fetchAll();
+        return $objets;
     }
 
     public function getObjet($id){
@@ -21,8 +21,8 @@ class ObjetDAO {
         $requete = $this->db->prepare($sql);
         $requete->execute(array('id' => $id));
 
-        $monstre = $requete->fetch();
-        return $monstre;
+        $objet = $requete->fetch();
+        return $objet;
     }
 
     public function addObjet($objet){

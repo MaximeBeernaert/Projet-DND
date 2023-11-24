@@ -16,6 +16,57 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
+-- Table structure for table `competence`
+--
+
+DROP TABLE IF EXISTS `competence`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `competence` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `nom` varchar(100) NOT NULL,
+  `desc` int(11) NOT NULL,
+  `atk` int(11) DEFAULT NULL,
+  `heal` int(11) DEFAULT NULL,
+  `niveauMinimum` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `competence`
+--
+
+LOCK TABLES `competence` WRITE;
+/*!40000 ALTER TABLE `competence` DISABLE KEYS */;
+/*!40000 ALTER TABLE `competence` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `enigme`
+--
+
+DROP TABLE IF EXISTS `enigme`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `enigme` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `intitule` varchar(100) NOT NULL,
+  `reponse` varchar(100) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `enigme`
+--
+
+LOCK TABLES `enigme` WRITE;
+/*!40000 ALTER TABLE `enigme` DISABLE KEYS */;
+/*!40000 ALTER TABLE `enigme` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `monstre`
 --
 
@@ -59,6 +110,8 @@ CREATE TABLE `objet` (
   `atk` int(11) DEFAULT NULL,
   `def` int(11) DEFAULT NULL,
   `dodge` int(11) DEFAULT NULL,
+  `isConsumable` int(11) DEFAULT NULL,
+  `niveauMinimum` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -87,8 +140,11 @@ CREATE TABLE `personnage` (
   `def` int(11) NOT NULL,
   `exp` int(11) NOT NULL,
   `level` int(11) NOT NULL,
+  `maxpv` int(11) NOT NULL,
+  `maxdef` int(11) NOT NULL,
+  `maxatk` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -97,7 +153,7 @@ CREATE TABLE `personnage` (
 
 LOCK TABLES `personnage` WRITE;
 /*!40000 ALTER TABLE `personnage` DISABLE KEYS */;
-INSERT INTO `personnage` VALUES (1,'Yohann',100,10,10,0,1);
+INSERT INTO `personnage` VALUES (5,'Maxime',100,10,10,0,1,100,10,10),(6,'Maxime',100,10,10,0,1,100,10,10),(7,'Maxime',100,10,10,0,1,100,10,10),(8,'Maxime',100,10,10,0,1,100,10,10),(9,'Maxime',100,10,10,0,1,100,10,10),(10,'Maxime',100,10,10,0,1,100,10,10),(11,'Maxime',100,10,10,0,1,100,10,10),(12,'Maxime',100,10,10,0,1,100,10,10),(13,'Maxime',100,10,10,0,1,100,10,10),(14,'Maxime',100,10,10,0,1,100,10,10),(15,'Maxime',100,10,10,0,1,100,10,10),(16,'Maxime',100,10,10,0,1,100,10,10),(17,'Maxime',100,10,10,0,1,100,10,10);
 /*!40000 ALTER TABLE `personnage` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -153,6 +209,30 @@ LOCK TABLES `salle` WRITE;
 UNLOCK TABLES;
 
 --
+-- Table structure for table `utiliser`
+--
+
+DROP TABLE IF EXISTS `utiliser`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `utiliser` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `idCom` int(11) NOT NULL,
+  `idPerso` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `utiliser`
+--
+
+LOCK TABLES `utiliser` WRITE;
+/*!40000 ALTER TABLE `utiliser` DISABLE KEYS */;
+/*!40000 ALTER TABLE `utiliser` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Dumping routines for database 'projetDND'
 --
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -165,4 +245,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-11-23 12:18:00
+-- Dump completed on 2023-11-24 11:24:13

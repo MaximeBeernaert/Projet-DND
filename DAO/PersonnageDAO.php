@@ -38,7 +38,7 @@ private $db;
     }
 
     public function addPersonnage($personnage){
-        $req = $this->db->prepare('INSERT INTO personnage(nom, pv, atk, def, exp, level, maxpv, maxdef, dodge, maxatk) VALUES(:name, :pv, :atk, :def, :exp, :level, :maxpv, :maxdef, :dodge, :maxatk)');
+        $req = $this->db->prepare('INSERT INTO personnage(nom, pv, atk, def, exp, level, maxpv, maxdef, maxatk) VALUES(:name, :pv, :atk, :def, :exp, :level, :maxpv, :maxdef, :maxatk)');
         $req->execute(array(
             'name' => $personnage->getName(),
             'pv' => $personnage->getPv(),
@@ -48,7 +48,6 @@ private $db;
             'level' => $personnage->getLevel(),
             'maxpv' => $personnage->getMaxpv(),
             'maxdef' => $personnage->getMaxdef(),
-            'dodge' => $personnage->getDodge(),
             'maxatk' => $personnage->getMaxatk()
         ));
     }

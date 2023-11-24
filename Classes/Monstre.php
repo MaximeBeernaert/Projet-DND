@@ -47,6 +47,9 @@ class Monstre {
     public function getPoisoned(){
         return $this->poisoned;
     }
+
+
+
     // SETTER
     public function setNom($nom){
         $this->nom = $nom;
@@ -83,6 +86,7 @@ class Monstre {
     public function reducePoisond(){
         $this->poisoned -=1;
     }
+
 
 }
 ?>

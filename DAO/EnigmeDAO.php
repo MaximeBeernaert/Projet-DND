@@ -12,21 +12,16 @@ class EnigmeDAO {
         $req = $this->db->prepare($sql);
         $req->bindValue(':id', $id);
         $req->execute();
-        $enigme = $req->fetch(PDO::FETCH_OBJ);
-        $req->closeCursor();
-        $enigme = new Enigme($enigme->intitule, $enigme->reponse);
+        $enigme = $req->fetchAll();
         return $enigme;
     }
 
     public function getEnigmes(){
         $sql = "SELECT * FROM enigme";
-        $req = $this->db->prepare($sql);
-        $req->execute();
-        while($enigme = $req->fetch(PDO::FETCH_OBJ)){
-            $enigmes[] = new Enigme($enigme->intitule, $enigme->reponse);
-        }
-        $req->closeCursor();
-        return $enigmes;
+        $requete = $this->db->prepare($sql);
+        $requete->execute();
+        $competence = $requete->fetchAll();
+        return $competence;
     }
 
     public function addEnigme($enigme){
