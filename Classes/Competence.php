@@ -1,5 +1,5 @@
 <?php
-
+// CREATE CLASS COMP
 class Competence {
     protected $nom;
     protected $desc;
@@ -7,6 +7,7 @@ class Competence {
     protected $atk;
     protected $niveauMinimum;
 
+    // CREATE CONSTRUCTOR
     public function __construct($nom, $desc, $heal, $atk, $niveauMinimum){
         $this->nom = $nom;
         $this->desc = $desc;

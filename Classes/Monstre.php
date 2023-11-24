@@ -1,5 +1,6 @@
 <?php
 
+// CREATE CLASS
 class Monstre {
     private $nom;
     private $pv;
@@ -8,8 +9,9 @@ class Monstre {
     private $def;
     private $exp;
     private $poisoned = 0;
-    private $isDenfending = false;
+    private $isDefending = false;
 
+    // CREATE CONSTRUTOR
     public function __construct($nom, $pv, $atk, $descAtk, $def, $exp){
         $this->nom = $nom;
         $this->pv = $pv;
