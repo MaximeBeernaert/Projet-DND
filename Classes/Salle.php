@@ -27,7 +27,7 @@ class Salle {
         return $this->enigme;
     }
     public function getMarchand(){
-        return $this->marchand
+        return $this->marchand;
     }
 
     public function setNiveau($niveau){

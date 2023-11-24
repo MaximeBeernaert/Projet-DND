@@ -54,7 +54,7 @@ private $db;
     }
 
     public function updatePersonnage ($id, $personnage) {
-        $req = $this->db->prepare('UPDATE personnage SET name = :name, pv = :pv, atk = :atk, def = :def, exp = :exp, level = :level WHERE id = :id');
+        $req = $this->db->prepare('UPDATE personnage SET nom = :name, pv = :pv, atk = :atk, def = :def, exp = :exp, level = :level WHERE id = :id');
         $req->execute(array(
             'name' => $personnage->getName(),
             'pv' => $personnage->getPv(),

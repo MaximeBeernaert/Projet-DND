@@ -1,10 +1,10 @@
 <?php
 
-class ObjetsDAO{
+class ObjetDAO {
     private $db;
 
     public function __construct($db){
-        $this->db = $db
+        $this->db = $db;
     }
 
     public function getObjets(){
@@ -12,7 +12,7 @@ class ObjetsDAO{
         $requete = $this->db->prepare($sql);
         $requete->execute();
 
-        $monstres = $requete->fetchAll()
+        $monstres = $requete->fetchAll();
         return $monstres;
     }
 

@@ -5,19 +5,21 @@ class Personnage {
     protected $atk = 10;
     protected $def = 10;
     protected $exp = 0;
-    protected $expNext = 0;
+    protected $expNext = 0; // ? c'est quoi?
     protected $level = 1;
     protected $id;
     protected $maxpv;
     protected $maxdef;
     protected $maxatk;
     protected $dodge = 0;
+    protected $isDefending;
 
-    public function __construct($name){
+    public function __construct($name, $pv, $atk, $def, $exp, $level, $maxpv, $maxdef, $maxatk){
         $this->name = $name;
         $this->maxpv = $this->pv;
         $this->maxdef = $this->def;
         $this->maxatk = $this->atk;
+        $this->isDefending = false;
     }
 
     // GETTER
@@ -56,6 +58,9 @@ class Personnage {
     }
     public function getDodge(){
         return $this->dodge;
+    }
+    public function getIsDefending(){
+        return $this->isDefending;
     }
 
 
@@ -96,7 +101,18 @@ class Personnage {
     public function setDodge($dodge){
         $this->dodge = $dodge;
     }
+    public function setIsDefending($isDefending){
+        $this->isDefending = $isDefending;
+    }
 
+    //fonction de défense
+    public function startDefending() {
+        $this->isDefending = true;
+    }
+
+    public function stopDefending() {
+        $this->isDefending = false;
+    }
 
 }
 

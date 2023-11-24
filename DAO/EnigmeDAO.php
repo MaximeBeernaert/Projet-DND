@@ -53,7 +53,7 @@ class EnigmeDAO {
         $req = $this->db->prepare($sql);
         $req->bindValue(':id', $id);
 
-
+    }
 }
 
 ?>

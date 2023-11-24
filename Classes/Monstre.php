@@ -7,7 +7,7 @@ class Monstre {
     private $descAtk;
     private $def;
     private $exp;
-    
+    private $poisoned;
 
     public function __construct($nom, $pv, $atk, $descAtk, $def, $exp){
         $this->nom = $nom;
@@ -16,6 +16,7 @@ class Monstre {
         $this->descAtk = $descAtk;
         $this->def = $def;
         $this->exp = $exp;
+        $this->poisoned = 0;
     }
 
     // GETTER
@@ -43,7 +44,9 @@ class Monstre {
         return $this->exp;
     }
 
-
+    public function getPoisoned(){
+        return $this->poisoned;
+    }
     // SETTER
     public function setNom($nom){
         $this->nom = $nom;
@@ -68,8 +71,18 @@ class Monstre {
     public function setExp($exp){
         $this->exp = $exp;
     }
+
+    public function setPoisoned($poisoned){
+        $this->poisoned = $poisoned;
+    }
+
+    public function isPoisoned() {  
+        return $this->poisoned > 0;
+    }
+
+    public function reducePoisond(){
+        $this->poisoned -=1;
+    }
+
 }
-
-
-
 ?>
