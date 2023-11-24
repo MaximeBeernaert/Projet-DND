@@ -386,41 +386,61 @@ function takeExp($gestionDAO, $personnage, $exp){
 
 // ACTION SALLE
 function avancerSalle($gestionDAO, $personnage){
+    // Clear the console screen
     popen('cls', 'w');
 
-    echo "Vous avancez vers la salle";
-    $niveau = $personnage->getLevel();
-    $ennemie = rand(1,5);
-    $piege = rand(0,1);
-    $enigme = rand(0,1);
-    $marchand = rand(0,1);
+    // Display a message indicating that the character is advancing to the next room
+    echo "You advance towards the next room.";
     
-    $salle = new Salle ($niveau, $ennemie, $piege, $enigme, $marchand);
+    // Generate random elements for the room (enemy, trap, puzzle, merchant)
+    $level = $personnage->getLevel();
+    $enemy = rand(1, 5);
+    $trap = rand(0, 1);
+    $puzzle = rand(0, 1);
+    $merchant = rand(0, 1);
+    
+    // Create a new room object with the generated elements
+    $room = new Room($level, $enemy, $trap, $puzzle, $merchant);
 
-    readline("Appuyer sur entrer pour continuer");
+    // Wait for user input before proceeding
+    readline("Press enter to continue");
 
-    if($salle->getEnigme() > 0){
-        doEnigme($personnage, $gestionDAO);
+    // Check if the room has a puzzle and execute it if necessary
+    if($room->getPuzzle() > 0){
+        solvePuzzle($personnage, $gestionDAO);
     }
 
-    if($salle->getPiege() > 0){
-        activerPiege($gestionDAO, $personnage);
+    // Check if the room has a trap and activate it if necessary
+    if($room->getTrap() > 0){
+        activateTrap($gestionDAO, $personnage);
     }
-    if($salle->getEnnemie() > 0){
-        $listeMonstres = [];
-        $monstres = showMonstre($gestionDAO, $personnage);
-        for($i =0; $i<$salle->getEnnemie(); $i++){
-            $random = rand(1, count($monstres));
-            $monstre = $monstres[$random-1];
-            array_push($listeMonstres, $monstre);
+
+    // Check if the room has enemies and initiate combat if necessary
+    if($room->getEnemy() > 0){
+        $monsterList = [];
+        $monsters = showMonster($gestionDAO, $personnage);
+        
+        // Randomly select monsters from the available ones
+        for($i = 0; $i < $room->getEnemy(); $i++){
+            $random = rand(1, count($monsters));
+            $monster = $monsters[$random - 1];
+            array_push($monsterList, $monster);
         }
-        combatSalle($personnage, $listeMonstres, $gestionDAO);
-        ouvrirCoffre($personnage, $gestionDAO);
+
+        // Engage in combat with the selected monsters
+        combatRoom($personnage, $monsterList, $gestionDAO);
+        
+        // Open the treasure chest after defeating the enemies
+        openChest($personnage, $gestionDAO);
     }
-    if($salle->getMarchand() > 0){
-        marchander($personnage, $gestionDAO['objetDAO']);
+
+    // Check if the room has a merchant and allow the player to trade if necessary
+    if($room->getMerchant() > 0){
+        trade($personnage, $gestionDAO['itemDAO']);
     }
-    menuJoueur($gestionDAO['personnageDAO'], $personnage);
+
+    // Return to the player menu after completing the room actions
+    playerMenu($gestionDAO['personnageDAO'], $personnage);
 }
 
 // DISPLAY MONSTERS ACCORDING TO PLAYER LEVEL
