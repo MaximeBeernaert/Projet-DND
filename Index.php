@@ -140,7 +140,6 @@ function chargerPartie($gestionDAO){
 
     $personnage = new Personnage($tempPersonnage['nom'], $tempPersonnage['pv'], $tempPersonnage['atk'], $tempPersonnage['def'], $tempPersonnage['exp'], $tempPersonnage['level'], $tempPersonnage['maxpv'], $tempPersonnage['maxdef'], $tempPersonnage['maxatk']);
     $personnage->setId($tempPersonnage['id']);
-    $personnage->setId($tempPersonnage['id']);
     return $personnage;
 }
 
@@ -301,9 +300,6 @@ function levelUp($gestionDAO, $personnage){
 function takeExp($gestionDAO, $personnage, $exp){
     $exp += $personnage->getExp();
     $personnage->setExp($personnage->getExp());
-function takeExp($gestionDAO, $personnage, $exp){
-    $exp += $personnage->getExp();
-    $personnage->setExp($personnage->getExp());
     $gestionDAO['personnageDAO']->updatePersonnage($personnage->getId(), $personnage);
 }
 
@@ -329,7 +325,6 @@ function avancerSalle($gestionDAO, $personnage){
     }
 
     if($salle->getPiege() > 0){
-        activerPiege($gestionDAO, $personnage);
         activerPiege($gestionDAO, $personnage);
     }
     if($salle->getEnnemie() > 0){
@@ -377,9 +372,7 @@ function doEnigme($personnage, $gestionDAO) {
         $personnage->setExp($personnage->getExp() + 100);
         $personnage->setPv($personnage->getPv() + 10);
         echo "Vous gagnez 10 PV et 100 exp.\n";
-        echo "Vous gagnez 10 PV et 100 exp.\n";
         $gestionDAO['personnageDAO']->updatePersonnage($personnage->getId(), $personnage);
-        $tempPersonnage = $gestionDAO['personnageDAO']->getPersonnage($personnage->getId());
         $tempPersonnage = $gestionDAO['personnageDAO']->getPersonnage($personnage->getId());
         readline("Appuyer sur entrer pour continuer");
     }
@@ -444,13 +437,9 @@ function activerPiege($gestionDAO, $personnage){
         $personnage->setPv($personnage->getPv() - $personnage->getLevel() * 10);
         echo "Vous n'avez pas réussi à esquiver le piège.\n";
         echo "Vous perdez ". ($personnage->getLevel() * 10) ." points de vie, il vous reste : " . $personnage->getPv() . "\n";
-        $personnage->setPv($personnage->getPv() - $personnage->getLevel() * 10);
-        echo "Vous n'avez pas réussi à esquiver le piège.\n";
-        echo "Vous perdez ". ($personnage->getLevel() * 10) ." points de vie, il vous reste : " . $personnage->getPv() . "\n";
     } else {
         echo "Vous avez réussi à esquiver le piège`\n";
     }
-    readline("Appuyer sur entrer pour continuer");
     readline("Appuyer sur entrer pour continuer");
 }
 
@@ -773,106 +762,7 @@ function combatSalle( $personnage, $listeMonstres, $gestionDAO){
 }
 
 function randAtkPerso($gestionDAO, $personnage, $listeMonstre){
-
-
-
-
-// function estEmpoisoné($personnageDAO, $monstreDAO){
-//     $personnage = $personnageDAO->getPersonnage(1);
-//     $monstre = $monstreDAO->getMonstre(1);
-//     $monstre = $monstreDAO->setPoisoned(2);
-//     if
-// }
- 
-// function potion($gestionDAO, $personnage){
-//     $objet = $gestionDAO['objetDAO']->getMonstre(1);
-//     $personnage->setPv($personnage->getPv() + 10);
-//     $gestionDAO['personnageDAO']->updatePersonnage(1, $personnage);
-//     echo "Le personnage a bu une potion, il lui reste " . $personnage->getPv() . " points de vie." ;
-// }
-
-// function mourir($gestionDAO['personnageDAO'], $gestionDAO['monstreDAO']){
-//     $personnage = $gestionDAO['personnageDAO']->getPersonnage(1);
-//     $monstre = $gestionDAO['monstreDAO']->getMonstre(1);
-//     if ($personnage->getPv() <= 0){
-//         echo "Le personnage est mort, il a perdu la partie.";
-//     }
-//     if ($monstre->getPv() <= 0){
-//         echo "Le monstre est mort, le personnage a gagné la partie.";
-//     }
-// }
-
-function combatSalle( $personnage, $listeMonstres, $gestionDAO){
-    echo "Vous êtes attaqué par " . count($listeMonstres) . " monstre" . (count($listeMonstres)!=1) ? "s" : "" ."!\n";
-    $exp = 0;
-    foreach($listeMonstre as $monstre){
-        $exp += $monstre->getExp();
-    }
-
-
-    while ($personnage->getPv() > 0 && count($listeMonstres) > 0){
-        if($personnage->getIsDefending() == true){
-            $personnage->setIsDefending(false);
-        }
-        echo "Que voulez-vous faire ?\n";
-        echo "1. Attaquer\n";
-        echo "2. Se défendre\n";
-        echo "3. Utiliser un objet\n";
-        $choix = readline("Votre choix : ");
-        switch ($choix) {
-            case 1:
-                randAtkPerso($gestionDAO, $personnage, $listeMonstre);
-                foreach($listeMonstres as $key => $monstre){
-                    $ennemiechoice = rand(1, 2);
-                    if ($ennemiechoice == 1){
-                        randAtkMonstre($gestionDAO, $personnage, $monstre);
-
-                    } else {
-                        $monstre->getIsDefending(true);
-                    }
-                }
-                
-                break;
-            case 2:
-                // defensePerso($gestionDAO);
-                $personnage->setIsDefending(true);
-                foreach($listeMonstres as $key => $monstre){
-                    randAtkMonstre($gestionDAO, $personnage, $monstre);
-                }
-                break;
-            case 3:
-                // potion($gestionDAO, $personnage);
-                // utiliser un objet;
-                utiliserUnOBjet();
-                foreach($listeMonstres as $key => $monstre){
-                    randAtkMonstre($gestionDAO, $personnage, $monstre);
-                }
-                break;
-            default:
-                echo "Choix invalide\n";
-                break;
-        }
-    } if ($personnage->getPv() <= 0){
-        echo "Le personnage est mort, il a perdu la partie.";
-    }elseif (count($listeMonstre)){
-        echo "Le monstre est mort, le personnage a gagné la partie.";
-        takeExp($gestionDAO, $personnage, $exp);
-        levelUp($gestionDAO, $personnage);
-    }
-}
-
-function randAtkPerso($gestionDAO, $personnage, $listeMonstre){
     $dice = rand(1, 20);
-
-    echo "Selectionnez le monstre à attaquer :\n";
-    foreach($listeMonstres as $key => $monstre){
-        echo $key+1 . " - " . $monstre['nom'] . " - " . $monstre['desc'] . "\n";
-    }
-    $choix = (int)readline('Numéro du monstre à attaquer : ');
-    if($choix < 1 || $choix > count($listeMonstres)){
-        randAtkPerso($gestionDAO, $personnage, $listeMonstre);
-    }
-    $monstre = $listeMonstres[$choix-1];
 
     echo "Selectionnez le monstre à attaquer :\n";
     foreach($listeMonstres as $key => $monstre){
@@ -888,31 +778,15 @@ function randAtkPerso($gestionDAO, $personnage, $listeMonstre){
         case 1:
             echo "Le personnage a raté son attaque (échec critique).\n";
             $personnage->setPv($personnage->getPv() - floor( $personnage->getAtk() / 2));
-            echo "Le personnage a raté son attaque (échec critique).\n";
-            $personnage->setPv($personnage->getPv() - floor( $personnage->getAtk() / 2));
             $gestionDAO['personnageDAO']->updatePerso(1, $personnage);
             break;
         case 20:
             echo "Le personnage a fait un coup critique !\n";
             $monstre->setPv($monstre->getPv() - (($personnage->getAtk() * 2)));
-            $monstre->setPv($monstre->getPv() - (($personnage->getAtk() * 2)));
             $gestionDAO['monstreDAO']->updateMonstre(1, $monstre);
             echo "Le personnage a attaqué le monstre, il lui reste " . $monstre->getPv() . " points de vie." ;
             break;
         default:
-            if($dice + $personnage->getAtk() > $monstre->getDef() ) {
-                if($monstre_>getIsDenfending() == true){
-                    defensemonstre($gestionDAO, $personnage, $monstre);
-                } else {
-                    $monstre->setPv($monstre->getPv() - ($personnage->getAtk()));
-                    $gestionDAO['monstreDAO']->updateMonstre($monstre->getId(), $monstre);
-                    echo "Le personnage a attaqué le monstre, il lui reste " . $monstre->getPv() . " points de vie." ;
-                    
-                }
-            }else{
-                echo "Le monstre a bloqué l'attaque du personnage.\n"
-            }
-            
             if($dice + $personnage->getAtk() > $monstre->getDef() ) {
                 if($monstre_>getIsDenfending() == true){
                     defensemonstre($gestionDAO, $personnage, $monstre);
@@ -956,8 +830,6 @@ function defensePerso($gestionDAO, $personnage, $monstre) {
     } else {
         $personnage->setDef($personnage->getDef() - 1);
         $gestionDAO['personnageDAO']->updatePersonnage($personnage->getId(), $personnage);
-        $personnage->setDef($personnage->getDef() - 1);
-        $gestionDAO['personnageDAO']->updatePersonnage($personnage->getId(), $personnage);
         echo "Le personnage a subi une attaque. Nouvelle valeur de défense : {$personnage->getDef()}\n";
     }
 }
@@ -969,14 +841,9 @@ function randAtkMonstre($gestionDAO, $personnage, $monstre){
             echo "Le monstre a raté son attaque.\n";
             $monstre->setPv($monstre->getPv() - floor($monstre->getAtk() / 2));
             echo "Le monstre prend " . floor($monstre->getAtk() / 2) . " dégats.\n";
-            $monstre->setPv($monstre->getPv() - floor($monstre->getAtk() / 2));
-            echo "Le monstre prend " . floor($monstre->getAtk() / 2) . " dégats.\n";
             break;
         case 20:
             echo "Le monstre a fait un coup critique !\n";
-            $personnage->setPv($personnage->getPv() - (($monstre->getAtk() * 2)));
-            $gestionDAO['personnageDAO']->updatePersonnage($personnage->getId(), $personnage);
-            echo "Le personnage a attaqué le monstre, il lui reste " . $monstre->getPv() . " points de vie." ;
             $personnage->setPv($personnage->getPv() - (($monstre->getAtk() * 2)));
             $gestionDAO['personnageDAO']->updatePersonnage($personnage->getId(), $personnage);
             echo "Le personnage a attaqué le monstre, il lui reste " . $monstre->getPv() . " points de vie." ;
@@ -985,9 +852,6 @@ function randAtkMonstre($gestionDAO, $personnage, $monstre){
         if($personnage->getIsDefending()){
             defensePerso($gestionDAO, $personnage, $monstre);
         } else {
-            $personnage->setPv($personnage->getPv() - ($monstre->getAtk()));
-            $gestionDAO['personnageDAO']->updatePersonnage($personnage->getID(), $personnage);
-            echo "Le monstre a attaqué le personnage, il lui reste " . $personnage->getPv() . " points de vie." ;
             $personnage->setPv($personnage->getPv() - ($monstre->getAtk()));
             $gestionDAO['personnageDAO']->updatePersonnage($personnage->getID(), $personnage);
             echo "Le monstre a attaqué le personnage, il lui reste " . $personnage->getPv() . " points de vie." ;
@@ -1003,87 +867,17 @@ function defensemonstre($gestionDAO, $personnage, $monstre){
         echo "Le monstre n'a plus de défense. ";
         $monstre->setPv($monstre->getPv() - $personnage->getAtk());
         $gestionDAO['monstreDAO']->updateMonstre($monstre->getId(), $monstre);
-        $gestionDAO['monstreDAO']->updateMonstre($monstre->getId(), $monstre);
         echo "Le personnage a attaqué le monstre, il lui reste " . $monstre->getPv() . " points de vie." ;
     } else {
-        $monstre->setDef($monstre->getDef() - $personnage->getAtk());
-        $gestionDAO['monstreDAO']->updatePersonnage(1, $monstre);
-        echo "Le monstre a une attaque. Nouvelle valeur de défense : {$monstre->getDef()}\n";
-
+        $monstre->setDef($monstre->getDef() - 1);
+        $gestionDAO['monstreDAO']->updateMonstre($monstre->getId(), $monstre);
+        echo "Le monstre a contré une attaque. Nouvelle valeur de défense : {$monstre->getDef()}\n";
     }
 }
 
-// function estEmpoisoné($personnageDAO, $monstreDAO){
-//     $personnage = $personnageDAO->getPersonnage(1);
-//     $monstre = $monstreDAO->getMonstre(1);
-//     $monstre = $monstreDAO->setPoisoned(2);
-//     if
-// }
- 
-// function potion($gestionDAO, $personnage){
-//     $objet = $gestionDAO['objetDAO']->getMonstre(1);
-//     $personnage->setPv($personnage->getPv() + 10);
-//     $gestionDAO['personnageDAO']->updatePersonnage(1, $personnage);
-//     echo "Le personnage a bu une potion, il lui reste " . $personnage->getPv() . " points de vie." ;
-// }
-
-// function mourir($gestionDAO['personnageDAO'], $gestionDAO['monstreDAO']){
-//     $personnage = $gestionDAO['personnageDAO']->getPersonnage(1);
-//     $monstre = $gestionDAO['monstreDAO']->getMonstre(1);
-//     if ($personnage->getPv() <= 0){
-//         echo "Le personnage est mort, il a perdu la partie.";
-//     }
-//     if ($monstre->getPv() <= 0){
-//         echo "Le monstre est mort, le personnage a gagné la partie.";
-//     }
-// }
-
-function combat($gestionDAO, $listeMonstres, $personnage, $monstre){
-    $personnage = $gestionDAO['personnageDAO']->getPersonnage(1);
-    echo "Un monstre vous attaque !";
-        while ($personnage->getPv() > 0 && count($listeMonstres) > 0){
-            echo "Que voulez-vous faire ?\n";
-            echo "1. Attaquer\n";
-            echo "2. Se défendre\n";
-            echo "3. Se soigner\n";
-            $choix = readline("Votre choix : ");
-            switch ($choix) {
-                case 1:
-                    randAtkPerso($gestionDAO, $personnage, $monstre);
-                    for($i=0; $i<count($listeMonstres); $i++){
-                        $ennemiechoice = rand(1, 2);
-                        if ($ennemiechoice == 1){
-                            randAtkMonstre($gestionDAO, $personnage, $monstre);
+function utiliserObjet(){
     
-                        } else {
-                            defensemonstre($gestionDAO, $personnage, $monstre);
-                        }
-                    }
-                    
-                    break;
-                case 2:
-                    // defensePerso($gestionDAO);
-                    $personnage->startDefending();
-                    randAtkMonstre($gestionDAO, $personnage, $monstre);
-                    break;
-                case 3:
-                    potion($gestionDAO, $personnage);
-                    randAtkMonstre($gestionDAO, $personnage, $monstre);
-                    break;
-                default:
-                    echo "Choix invalide\n";
-
-                    break;
-            }
-        } if ($personnage->getPv() <= 0){
-            echo "Le personnage est mort, il a perdu la partie.";
-        }elseif ($monstre->getPv() <= 0){
-            echo "Le monstre est mort, le personnage a gagné la partie.";
-            takeExp($gestionDAO, $personnage, $monstre);
-            levelUp($gestionDAO, $personnage);
-        }
 }
-
 
 
 // FIN DE PARTIE
