@@ -390,7 +390,7 @@ function avancerSalle($gestionDAO, $personnage){
     popen('cls', 'w');
 
     // Display a message indicating that the character is advancing to the next room
-    echo "You advance towards the next room.";
+    echo "vous avancer dans la salle.";
     
     // Generate random elements for the room (enemy, trap, puzzle, merchant)
     $level = $personnage->getLevel();
@@ -403,7 +403,7 @@ function avancerSalle($gestionDAO, $personnage){
     $room = new Room($level, $enemy, $trap, $puzzle, $merchant);
 
     // Wait for user input before proceeding
-    readline("Press enter to continue");
+    readline("appuyer sur entrer pour continuer");
 
     // Check if the room has a puzzle and execute it if necessary
     if($room->getPuzzle() > 0){
